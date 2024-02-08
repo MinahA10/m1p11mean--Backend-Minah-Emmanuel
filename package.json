@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "dev": "nodemon ./bin/www"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
@@ -15,10 +16,15 @@
     "express-handlebars": "^7.1.2",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
+<<<<<<< HEAD
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.1.1",
     "morgan": "~1.9.1",
     "nodemon": "^3.0.3",
     "validator": "^13.11.0"
+=======
+    "mongoose": "^8.1.1",
+    "morgan": "~1.9.1"
+>>>>>>> dev
   }
 }

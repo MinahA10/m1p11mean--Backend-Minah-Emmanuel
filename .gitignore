@@ -1,3 +1,7 @@
+<<<<<<< HEAD
 *.log
 /node_modules
 /bin
+=======
+/node_modules
+>>>>>>> dev

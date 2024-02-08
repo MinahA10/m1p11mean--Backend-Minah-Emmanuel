@@ -3,7 +3,10 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const exphbs = require('express-handlebars');
 
+var indexRouterGuest = require('./routes/guest/index');
+var indexRouterAuth = require('./routes/auth');
 const { engine } = require('express-handlebars');
 const cors = require('cors');
 
@@ -15,6 +18,9 @@ var authClientRoute = require('./routes/authClient');
 var app = express();
 
 // view engine setup
+app.engine('handlebars', exphbs.engine({defaultLayout: "guest", layoutsDir: "./views/layouts", extname: "handlebars"}));
+app.set('views', path.join(__dirname, './views'));
+app.set('view engine', 'handlebars');
 app.engine('handlebars', engine());
 app.set('view engine', 'handlebars');
 app.set('views',path.join(__dirname, 'views'))
@@ -29,6 +35,9 @@ app.use(cors());
 connectDB().catch(err => console.log(err));
 
 app.options('/auth/login', cors());
+
+app.use('/', indexRouterGuest);
+app.use('/', indexRouterAuth);
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
