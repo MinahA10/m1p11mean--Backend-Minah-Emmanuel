@@ -4,16 +4,17 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const exphbs = require('express-handlebars');
-
-var indexRouterGuest = require('./routes/guest/index');
-var indexRouterAuth = require('./routes/auth');
 const { engine } = require('express-handlebars');
 const cors = require('cors');
 
+//Services
 const { connectDB } = require('./services/mongoose')
-var indexRouter = require('./routes/index');
+
+//routes
 var usersRouter = require('./routes/users');
-var authClientRoute = require('./routes/authClient');
+var indexRouterGuest = require('./routes/guest/index');
+var indexRouterAuth = require('./routes/auth');
+var authClientRoute = require('./routes/client/authClient');
 
 var app = express();
 
@@ -39,7 +40,6 @@ app.options('/auth/login', cors());
 app.use('/', indexRouterGuest);
 app.use('/', indexRouterAuth);
 
-app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/auth',authClientRoute)
 
