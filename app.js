@@ -8,9 +8,16 @@ const { engine } = require('express-handlebars');
 const cors = require('cors');
 
 //Services
+//Services
 const { connectDB } = require('./services/mongoose')
 
 //routes
+var indexRouterGuest = require('./routes/guest/index');
+var indexRouterAuth = require('./routes/auth');
+var authClientRoute = require('./routes/client/authClient');
+
+//routes
+var usersRouter = require('./routes/users');
 var indexRouterGuest = require('./routes/guest/index');
 var indexRouterAuth = require('./routes/auth');
 var authClientRoute = require('./routes/client/authClient');
@@ -39,6 +46,8 @@ app.options('/auth/login', cors());
 
 app.use('/', indexRouterGuest);
 app.use('/', indexRouterAuth);
+
+app.use('/users', usersRouter);
 app.use('/auth',authClientRoute)
 
 // catch 404 and forward to error handler
