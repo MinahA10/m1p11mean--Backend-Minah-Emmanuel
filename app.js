@@ -4,9 +4,17 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const exphbs = require('express-handlebars');
+const { engine } = require('express-handlebars');
+const cors = require('cors');
 
+//Services
+const { connectDB } = require('./services/mongoose')
+
+//routes
+var usersRouter = require('./routes/users');
 var indexRouterGuest = require('./routes/guest/index');
 var indexRouterAuth = require('./routes/auth');
+var authClientRoute = require('./routes/client/authClient');
 
 var app = express();
 
@@ -14,16 +22,26 @@ var app = express();
 app.engine('handlebars', exphbs.engine({defaultLayout: "guest", layoutsDir: "./views/layouts", extname: "handlebars"}));
 app.set('views', path.join(__dirname, './views'));
 app.set('view engine', 'handlebars');
+app.engine('handlebars', engine());
+app.set('view engine', 'handlebars');
+app.set('views',path.join(__dirname, 'views'))
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cors());
+
+connectDB().catch(err => console.log(err));
+
+app.options('/auth/login', cors());
 
 app.use('/', indexRouterGuest);
 app.use('/', indexRouterAuth);
 
+app.use('/users', usersRouter);
+app.use('/auth',authClientRoute)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
