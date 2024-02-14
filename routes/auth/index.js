@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+const authController = require('../../controllers/authController');
+const serviceController = require('../../controllers/serviceController');
 
 // Middleware d'authentification
 const authMiddleware = (req, res, next) => {
@@ -10,18 +12,10 @@ const authMiddleware = (req, res, next) => {
   }
 };
 
-router.get('/home', authMiddleware, function(req, res, next) {
-  res.render('pages/home', {layout: 'auth', title: 'Page d\'accueil'});
-});
+router.get('/home', authMiddleware, authController.home);
 
-router.get('/logout', authMiddleware, function(req, res, next) {
-  req.session.destroy((err) => {
-    if (err) {
-      console.error('Erreur lors de la suppression de la session :', err);
-    } else {
-      res.redirect('/');
-    }
-  });
-});
+router.get('/logout', authMiddleware, authController.logout);
+
+router.get('/services', authMiddleware, serviceController.list);
 
 module.exports = router;

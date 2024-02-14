@@ -36,7 +36,12 @@ app.use(cors());
 app.use(session({
   secret: 'm1p10mean-Emmanuel-Minah-Backend',
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: true,
+  cookie: { 
+    secure: false, // Si true, le cookie ne sera transmis que sur une connexion HTTPS
+    httpOnly: true, // Empêche l'accès au cookie via JavaScript
+    maxAge: 24 * 60 * 60 * 1000, // Durée de vie du cookie en millisecondes
+  }
 }));
 
 // Middleware pour ajouter les variables de session à res.locals
