@@ -1,19 +1,25 @@
 <div class="card-body p-5 text-center">
     <h4 class="mb-4">Se connecter</h4>
+    {{#if error }}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <strong>{{ error }}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    {{/if}}
     <div class="position-relative">
-        <form action="/auth-home" method="get">
+        <form action="/login" method="post">
             <div class="form-outline mb-4">
-                <input type="email" name="username" id="username" class="form-control">
-                <label class="form-label pt-2" for="username">Nom d'utilisateur</label>
+                <input type="email" name="email" id="email" class="form-control" required>
+                <label class="form-label pt-2" for="email">Nom d'utilisateur</label>
             </div>
             <div class="form-outline mb-4">
-                <input type="password" name="motdepasse" id="motdepasse" class="form-control">
+                <input type="password" name="password" id="password" class="form-control" required>
                 <i class="position-absolute fas fa-eye-slash" id="icon-login" onclick="showPassword()"></i>
-                <label class="form-label pt-2" for="motdepasse">Mot de passe</label>
+                <label class="form-label pt-2" for="password">Mot de passe</label>
             </div>
             <div class="form-check mb-4">
                 <label class="form-check-label float-start" for="checkbox">
-                    <input class="form-check-input" type="checkbox" id="checkbox"> 
+                    <input class="form-check-input" type="checkbox" id="checkbox">
                     Souviens moi
                 </label>
                 <a href="/password" class="float-end text-gray"> Mot de passe oublié ?</a>

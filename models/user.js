@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 const UserSchema = mongoose.Schema({
     firstName: {
@@ -14,22 +15,36 @@ const UserSchema = mongoose.Schema({
     password: {
         type: String
     },
+    role: {
+        type: Number
+    },
+    contact: {
+        type: Array,
+        default: []
+    },
     createdAt: {
+        type: Date,
         default: new Date()
     }
 });
 
-module.exports.User = mongoose.model("User", UserSchema);
+const User = mongoose.model("users", UserSchema);
 
-module.exports.getUserById = (id, callback) => {
-    this.User.findById(id, callback);
+module.exports = User;
+
+
+module.exports.getUserById = (id) => {
+    return this.User.findById(id);
 }
 
-module.exports.login = user => {
-
+module.exports.login = async (email, password) => {
+    let check = null;
+    const user = await User.findOne({email: email});
+    if(user){
+        const isPasswordMatch = await bcrypt.compare(password, user.password);
+        if(isPasswordMatch){
+            check = user;
+        }
+    }
+    return check;
 }
-
-module.exports.logout = () => {
-    
-}
-
