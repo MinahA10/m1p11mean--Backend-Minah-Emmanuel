@@ -11,9 +11,13 @@ const cors = require('cors');
 const { connectDB } = require('./services/mongoose')
 
 //routes
-var usersRouter = require('./routes/users');
+
+//Admin
 var indexRouterGuest = require('./routes/guest/index');
 var indexRouterAuth = require('./routes/auth');
+var indexRouterEmploye = require('./routes/Admin/routerEmploye');
+
+//Api clients
 var authClientRoute = require('./routes/client/authClient');
 
 var app = express();
@@ -22,9 +26,7 @@ var app = express();
 app.engine('handlebars', exphbs.engine({defaultLayout: "guest", layoutsDir: "./views/layouts", extname: "handlebars"}));
 app.set('views', path.join(__dirname, './views'));
 app.set('view engine', 'handlebars');
-app.engine('handlebars', engine());
-app.set('view engine', 'handlebars');
-app.set('views',path.join(__dirname, 'views'))
+
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -37,11 +39,14 @@ connectDB().catch(err => console.log(err));
 
 app.options('/auth/login', cors());
 
+//admin
 app.use('/', indexRouterGuest);
 app.use('/', indexRouterAuth);
+app.use('/', indexRouterEmploye);
 
-app.use('/users', usersRouter);
+//client
 app.use('/auth',authClientRoute)
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
