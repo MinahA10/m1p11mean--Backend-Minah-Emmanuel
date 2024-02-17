@@ -1,6 +1,7 @@
 
 function home(req, res, next) {
-    res.render('pages/home', {layout: 'auth', title: 'Page d\'accueil', page: 'Tableau de bord'});
+    let page = req.session.user.role == 1 ? 'Tableau de bord' : 'Liste rendez-vous';
+    res.render('pages/home', {layout: 'auth', title: 'Page d\'accueil', page: page});
 }
 
 function logout(req, res, next) {

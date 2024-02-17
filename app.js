@@ -6,11 +6,14 @@ var logger = require('morgan');
 const exphbs = require('express-handlebars');
 const cors = require('cors');
 const session = require('express-session');
+const multer  = require('multer');
+const bodyParser = require('body-parser');
 
 //Services
 const { connectDB } = require('./services/mongoose')
 connectDB();
-
+// Fonction
+const fonction = require('./models/fonction');
 
 //routes
 var indexRouterGuest = require('./routes/guest/index');
@@ -53,6 +56,21 @@ app.use((req, res, next) => {
   }
   next();
 });
+
+// Pour stockage des fichiers
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './public/images') // Dossier où les fichiers seront sauvegardés
+  },
+  filename: function (req, file, cb) {
+    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    const extension = fonction.getFileExtension(file.originalname);
+    cb(null, uniqueSuffix + '.' + extension);
+  }
+});
+
+const upload = multer({ storage: storage });
+app.use(upload.array('images_services'));
 
 app.options('api/auth/login', cors());
 app.use('/', indexRouterGuest);

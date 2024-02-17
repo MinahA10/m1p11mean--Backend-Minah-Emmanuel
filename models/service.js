@@ -10,14 +10,22 @@ const ServicesSchema = mongoose.Schema({
         required: true
     },
     duration: {
-        type: Number,
+        type: String,
         required: true
     },
     commission: {
         type: Number,
         required: true
     },
+    images: {
+        type: String,
+        required: true
+    },
     createdAt: {
+        type: Date,
+        default: new Date()
+    },
+    updatedAt: {
         type: Date,
         default: new Date()
     }
@@ -26,3 +34,12 @@ const ServicesSchema = mongoose.Schema({
 const Services = mongoose.model("services", ServicesSchema);
 
 module.exports = Services;
+
+module.exports.getAllServices = async () => {
+    try{
+       const servicesList = await Services.find();
+       return servicesList;
+    }catch(err){
+        console.log("Error get all service");
+    }
+}
