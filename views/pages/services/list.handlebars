@@ -115,7 +115,7 @@
                 <div class="card-body">
                     <div class="h-85">
                         <h4 class="card-title">{{this.name}}</h4>
-                        <p class="card-text">{{this.price}} Ar</p>
+                        <p class="card-text">{{formatMillier this.price}} Ar</p>
                     </div>
                     <div class="d-flex justify-content-between">
                         <button type="button" class="btn btn-outline-success fs-2" data-bs-toggle="modal" value="{{ this._id }}" id="modificationServices" data-bs-target="#modalModificationService"><i class="fas fa-pencil-alt"></i> Modifier</button>

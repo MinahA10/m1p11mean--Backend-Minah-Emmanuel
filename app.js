@@ -24,7 +24,16 @@ var app = express();
 
 
 // view engine setup
-app.engine('handlebars', exphbs.engine({defaultLayout: "guest", layoutsDir: "./views/layouts/", extname: "handlebars"}));
+app.engine('handlebars', exphbs.engine({
+  defaultLayout: "guest", 
+  layoutsDir: "./views/layouts/",
+  extname: "handlebars",
+  helpers: {
+    formatMillier: function(args){
+      return fonction.formatMillier(args);
+    }
+  }
+}));
 app.set('views', path.join(__dirname, './views'));
 app.set('view engine', 'handlebars');
 
@@ -34,6 +43,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/auth/css', express.static(__dirname + '/public/css'));
+app.use('/auth/js', express.static(__dirname + '/public/js'));
+app.use('/auth/images', express.static(__dirname + '/public/images'));
 app.use(cors());
 
 app.use(session({
