@@ -1,0 +1,135 @@
+<!-- Modal d'ajou service -->
+<div class="modal fade" id="modalAjoutService" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <form action="/auth/add-service" method="post" enctype="multipart/form-data">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold" id="exampleModalLabel">Formulaire d'ajout service</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="nom" class="form-label">Nom</label>
+                            <input type="text" class="form-control" name="name" required>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="prix" class="form-label">Prix</label>
+                            <input type="number" class="form-control" name="price" required>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="dure" class="form-label">Duré</label>
+                            <input type="time" class="form-control" name="duration" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="commission" class="form-label">Commission</label>
+                            <input type="number" class="form-control" name="commission" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="image_service" class="form-label">Image</label>
+                            <input type="file" class="form-control" name="images_services" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary"> Ajouter</button>
+                    <button type="button" class="btn btn-secondary text-white" data-bs-dismiss="modal"> Fermer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal pour modifier un service -->
+<div class="modal fade" id="modalModificationService" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+            <form action="/auth/modification-services" method="post" enctype="multipart/form-data">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold" id="exampleModalLabel">Formulaire pour modifier un service</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label for="nom" class="form-label">Nom</label>
+                            <input type="text" class="form-control" id="name" name="name" required>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="prix" class="form-label">Prix</label>
+                            <input type="number" class="form-control" id="price" name="price" required>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="dure" class="form-label">Duré</label>
+                            <input type="time" class="form-control" id="duration" name="duration" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="commission" class="form-label">Commission</label>
+                            <input type="number" class="form-control" id="commission" name="commission" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="image" class="form-label">Image</label>
+                            <input type="file" class="form-control" id="images_services" name="images_services">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="hidden" name="servicesId" id="servicesModifId">
+                    <button type="submit" class="btn btn-primary"> Enregistrer</button>
+                    <button type="button" class="btn btn-secondary text-white" data-bs-dismiss="modal"> Fermer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalSuppressionService" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="suppressionServiceLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <form action="/auth/suppression-service" method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title fw-bold" id="suppressionServiceLabel">Suppression service</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex justify-content-center">
+                        <i class="mdi mdi-alert fs-1 text-danger"></i>
+                    </div>
+                    <p class="text-center">Vous voulez vraiment supprimer le service <span class="fw-bold" id="label_suppression_service"></span> ?</p>
+                </div>
+                <div class="modal-footer d-flex justify-content-center">
+                    <input type="hidden" name="servicesId" id="servicesSuppId">
+                    <button type="button" class="btn btn-secondary text-white w-45" data-bs-dismiss="modal">Non</button>
+                    <button type="submit" class="btn btn-danger text-white w-45">Oui</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    {{#each servicesList}}
+        <div class="col-sm-12 col-md-3">
+            <div class="card shadow h-100">
+                <img class="card-img-top h-180" src="{{this.images}}" alt="Card image">
+                <div class="card-body">
+                    <div class="h-85">
+                        <h4 class="card-title">{{this.name}}</h4>
+                        <p class="card-text">{{formatMillier this.price}} Ar</p>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <button type="button" class="btn btn-outline-success fs-2" data-bs-toggle="modal" value="{{ this._id }}" id="modificationServices" data-bs-target="#modalModificationService"><i class="fas fa-pencil-alt"></i> Modifier</button>
+                        <button type="button" class="btn btn-outline-danger fs-2" data-bs-toggle="modal" value="{{ this._id }}" id="suppressionServices" data-bs-target="#modalSuppressionService"><i class="fas fa-trash-alt"></i> Supprimer</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {{/each}}
+</div>
+<div class="row mt-4">
+    <div class="col-sm-12">
+        <div class="d-flex justify-content-center">
+            <button type="button" class="btn btn-secondary rounded-circle shadow-sm" data-bs-toggle="modal" data-bs-target="#modalAjoutService"><i class="fas fa-plus text-white fs-2 fw-bolder"></i></button>
+        </div>
+    </div>
+</div>

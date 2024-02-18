@@ -37,3 +37,15 @@ userSchema.methods.comparePassword = async function (candidatePassword) {
 const User = mongoose.model('users', userSchema);
 
 module.exports = User;
+
+module.exports.login = async (email, password) => {
+    let check = null;
+    const user = await User.findOne({email: email});
+    if(user){
+        const isPasswordMatch = await bcrypt.compare(password, user.password);
+        if(isPasswordMatch){
+            check = user;
+        }
+    }
+    return check;
+}
