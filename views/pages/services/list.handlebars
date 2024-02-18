@@ -1,6 +1,6 @@
 <!-- Modal d'ajou service -->
 <div class="modal fade" id="modalAjoutService" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content">
             <form action="/auth/add-service" method="post" enctype="multipart/form-data">
                 <div class="modal-header">
@@ -10,23 +10,23 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-4 mb-3">
-                            <label for="nom" class="form-label">Nom</label>
+                            <label for="nom" class="form-label">Nom <span class="required">*</span></label>
                             <input type="text" class="form-control" name="name" required>
                         </div>
                         <div class="col-md-4 mb-3">
-                            <label for="prix" class="form-label">Prix</label>
+                            <label for="prix" class="form-label">Prix <span class="required">*</span></label>
                             <input type="number" class="form-control" name="price" required>
                         </div>
                         <div class="col-md-4 mb-3">
-                            <label for="dure" class="form-label">Duré</label>
+                            <label for="dure" class="form-label">Duré <span class="required">*</span></label>
                             <input type="time" class="form-control" name="duration" required>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="commission" class="form-label">Commission</label>
+                            <label for="commission" class="form-label">Commission <span class="required">*</span></label>
                             <input type="number" class="form-control" name="commission" required>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="image_service" class="form-label">Image</label>
+                            <label for="image_service" class="form-label">Image <span class="required">*</span></label>
                             <input type="file" class="form-control" name="images_services" required>
                         </div>
                     </div>
@@ -42,7 +42,7 @@
 
 <!-- Modal pour modifier un service -->
 <div class="modal fade" id="modalModificationService" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content">
             <form action="/auth/modification-services" method="post" enctype="multipart/form-data">
                 <div class="modal-header">
@@ -52,19 +52,19 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-md-4 mb-3">
-                            <label for="nom" class="form-label">Nom</label>
+                            <label for="nom" class="form-label">Nom <span class="required">*</span></label>
                             <input type="text" class="form-control" id="name" name="name" required>
                         </div>
                         <div class="col-md-4 mb-3">
-                            <label for="prix" class="form-label">Prix</label>
+                            <label for="prix" class="form-label">Prix <span class="required">*</span></label>
                             <input type="number" class="form-control" id="price" name="price" required>
                         </div>
                         <div class="col-md-4 mb-3">
-                            <label for="dure" class="form-label">Duré</label>
+                            <label for="dure" class="form-label">Duré <span class="required">*</span></label>
                             <input type="time" class="form-control" id="duration" name="duration" required>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="commission" class="form-label">Commission</label>
+                            <label for="commission" class="form-label">Commission <span class="required">*</span></label>
                             <input type="number" class="form-control" id="commission" name="commission" required>
                         </div>
                         <div class="col-md-6 mb-3">
@@ -129,7 +129,7 @@
 <div class="row mt-4">
     <div class="col-sm-12">
         <div class="d-flex justify-content-center">
-            <button type="button" class="btn btn-secondary rounded-circle shadow-sm" data-bs-toggle="modal" data-bs-target="#modalAjoutService"><i class="fas fa-plus text-white fs-2 fw-bolder"></i></button>
+            <button type="button" class="btn btn-secondary fs-6 rounded-circle shadow" data-bs-toggle="modal" data-bs-target="#modalAjoutService"><i class="fas fa-plus text-white fw-bolder"></i></button>
         </div>
     </div>
 </div>

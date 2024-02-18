@@ -1,11 +1,9 @@
 const Services = require("../../models/service");
-const fonction = require("../../models/fonction");
 
 async function list(req, res, next) {
     try{
         const servicesList = await Services.getAllServices();
-        const data = fonction.convertStringOnObject(servicesList);
-        res.render('pages/services/list', {layout: 'auth', title: 'Liste des services', page: 'Liste des services', servicesList: data});
+        res.render('pages/services/list', {layout: 'auth', title: 'Liste des services', page: 'Liste des services', servicesList});
     }catch(err){
         res.status(500).render("pages/error/error-500")
     }
@@ -20,7 +18,7 @@ async function created(req, res, next) {
             price: req.body.price,
             duration: req.body.duration,
             commission: req.body.commission,
-            images: urlApp+'/images/'+ fileName,
+            images: urlApp+'/images/services/'+ fileName,
         }
         try{
             const serviceModel = new Services(dataService);
@@ -66,7 +64,7 @@ async function modificationServices(req, res, next){
             price: req.body.price,
             duration: req.body.duration,
             commission: req.body.commission,
-            images: urlApp+'/images/'+ fileName,
+            images: urlApp+'/images/services/'+ fileName,
             createdAt: simpleService.createdAt,
             updatedAt: new Date()
         };

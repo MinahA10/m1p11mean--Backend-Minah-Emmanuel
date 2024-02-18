@@ -1,0 +1,74 @@
+<div class="card">
+    <div class="card-body">
+        <form class="form-horizontal form-material" action="/auth/save-employe" method="POST" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <label for="firstName" class="form-label">Nom <span class="required">*</span></label>
+                    <input type="text" class="form-control" name="firstName" required>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="lastName" class="form-label">Prénom <span class="required">*</span></label>
+                    <input type="text" class="form-control" name="lastName" required>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <label for="email" class="form-label">Adresse e-mail <span class="required">*</span></label>
+                    <input type="email" class="form-control" name="email" required>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="contact1" class="form-label">Numéro téléphone n°1 <span class="required">*</span></label>
+                    <div class="input-group">
+                        <span class="input-group-text">+ 261</span>
+                        <input type="text" class="form-control" min="9" max="9" name="contact1" required>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="contact2" class="form-label">Numéro téléphone n°2</label>
+                    <div class="input-group">
+                        <span class="input-group-text">+ 261</span>
+                        <input type="text" class="form-control" min="9" max="9" name="contact2">
+                    </div>
+                </div>
+                <div class="col-md-12 mb-3" id="dropZonePhoto">
+                    <label for="photo" class="form-label drop-zone__prompt">Glisser et déposer une photo ici ou cliquez pour choisir un fichier <span class="required">*</span></label>
+                    <input type="file" class="form-control" id="fileInput"  name="photo" accept="image/*" required>
+                    <div class="col-md-12 border-bottom p-0">
+                        <img src="" id="photoPreview" alt="Aperçu de la photo" style="max-width: 200px; display: none;">
+                    </div>
+                </div>
+                <div class="col-md-12 mb-3">
+                    <label for="contact2" class="form-label">Spécialité <span class="required">*</span></label>
+                    <div class="row mx-1">
+                        <div class="col-md-2 form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="Manicure" name="speciality" value="Manicure">
+                            <label class="form-check-label" for="Manicure">Manicure</label>
+                        </div>
+                        <div class="col-md-2 form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="Coiffure_femme" name="speciality" value="Coiffure femme">
+                            <label class="form-check-label" for="Coiffure_femme">Coiffure femme</label>
+                        </div>
+                        <div class="col-md-2 form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="Coloration_cheveux" name="speciality" value="Coloration cheveux">
+                            <label class="form-check-label" for="Coloration_cheveux">Coloration cheveux</label>
+                        </div>
+                        <div class="col-md-2 form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="Massage" name="speciality" value="Massage">
+                            <label class="form-check-label" for="Massage">Massage</label>
+                        </div>
+                        <div class="col-md-2 form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="Pedicure" name="speciality" value="Pedicure">
+                            <label class="form-check-label" for="Pedicure">Pedicure</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 my-3">
+                    <button type="submit" class="btn btn-outline-success"> Enregistrer</button> 
+                    <a href="/auth/employes" class="btn btn-outline-secondary"> Fermer</a> 
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<script src="js/dragDrop.js"></script>
+
+
+                

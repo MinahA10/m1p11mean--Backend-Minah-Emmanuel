@@ -5,9 +5,10 @@ const userSchema = new mongoose.Schema({
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   email: {type: String, unique: true, required: true},
-  contact: { type: Array, default: [], required: [true, 'User phone number required']},
   password: { type: String, required: true , default: '123456' },
-  role: {type: Number, required: true},
+  contact: { type: Array, default: [], required: [true, 'User phone number required']},
+  role: {type: Number, default: 0},
+  statut: {type: Number, default: 1},
   photo: { type: String, required: true},
   speciality: {type: Array,default: []},
   appointments: {type: Array, default: []},
@@ -39,13 +40,13 @@ const User = mongoose.model('users', userSchema);
 module.exports = User;
 
 module.exports.login = async (email, password) => {
-    let check = null;
-    const user = await User.findOne({email: email});
-    if(user){
-        const isPasswordMatch = await bcrypt.compare(password, user.password);
-        if(isPasswordMatch){
-            check = user;
-        }
+  let check = null;
+  const user = await User.findOne({ email: email, statut: 1 });
+  if (user) {
+    const isPasswordMatch = await bcrypt.compare(password, user.password);
+    if (isPasswordMatch) {
+      check = user;
     }
-    return check;
+  }
+  return check;
 }

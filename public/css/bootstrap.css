@@ -53,3 +53,18 @@
 .d-grid {
     display: grid !important;
 }
+
+.required{
+    color: red !important;
+    font-weight: bold;
+}
+
+.cursor-pointer{
+    cursor: pointer;
+}
+
+.images{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}

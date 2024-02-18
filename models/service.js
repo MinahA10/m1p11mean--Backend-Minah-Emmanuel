@@ -37,7 +37,7 @@ module.exports = Services;
 
 module.exports.getAllServices = async () => {
     try{
-       const servicesList = await Services.find();
+       const servicesList = await Services.find().lean();
        return servicesList;
     }catch(err){
         console.log("Error get all service");
