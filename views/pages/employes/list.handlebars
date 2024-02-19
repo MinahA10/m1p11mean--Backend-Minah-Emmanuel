@@ -1,0 +1,39 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="row m-4">
+                <div class="table-responsive mt-3">
+                    <table class="table text-nowrap table-bordered">
+                        <thead>
+                            <tr>
+                                <th class="border-top-0">Photo</th>
+                                <th class="border-top-0">Nom et Prénom</th>
+                                <th class="border-top-0">Actif</th>
+                                <th class="border-top-0">Spécialité</th>
+                                <th class="border-top-0">Options</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each employes}}
+                            <tr>
+                                <td align="center"><img src="{{this.photo}}" alt="{{this.name}} Photo" class="images"></td>
+                                <td>{{this.firstName}} {{this.lastName}}</td>
+                                {{#if this.statut}}
+                                <td align="center"><i class="fs-6 fas fa-toggle-on cursor-pointer"></i></td>
+                                {{else }}
+                                <td align="center"><i class="fs-6 fas fa-toggle-on"></i></td>
+                                {{/if}}
+                                <td>{{this.speciality}}</td>
+                                <td align="center">
+                                    <a href="#" class="btn btn-outline-secondary"><i class="fas fa-eye"></i> Voir plus infos</a>
+                                </td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
+                    </table>
+                    <a href="/auth/new-employe" class="btn btn-secondary text-white rounded-circle shadow fs-6 mt-2 float-end"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
