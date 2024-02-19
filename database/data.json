@@ -1,0 +1,14 @@
+{
+    "firstName": "RAKOTO",
+    "lastName": "Jean",
+    "email": "administrateur@gmail.com",
+    "password": "$2b$10$zsGXj.WVyrxcAzgCFQ6U1.1MhdyCt0gh.arsEwk084iDel71lloIy",
+    "contact": ["32000000"],
+    "role": 1,
+    "statut": 1,
+    "photo": "http://localhost:3000/images/users/1.jpg",
+    "speciality": [],
+    "appointments": [],
+    "createdAt": "2024-02-19T08:02:06.995+00:00",
+    "updatedAt": "2024-02-19T08:02:06.995+00:00"
+}
