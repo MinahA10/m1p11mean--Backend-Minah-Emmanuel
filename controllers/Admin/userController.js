@@ -39,6 +39,7 @@ async function register(req, res, next) {
       firstName: req.body.firstName.trim().toUpperCase(),
       lastName: fonction.ucwords(req.body.lastName.trim()),
       email: req.body.email.trim(),
+      password: '123456',
       contact: fonction.listContact(req.body.contact1.trim(), req.body.contact2.trim()),
       photo: urlApp+'/images/users/'+ fileName,
       speciality: speciality,
