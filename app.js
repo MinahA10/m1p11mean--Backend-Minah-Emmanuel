@@ -33,6 +33,13 @@ app.engine('handlebars', exphbs.engine({
     },
     formaterNumeroTelephone: function(args){
       return fonction.formaterNumeroTelephone('+261'+args);
+    },
+    getContact: function(args, index){
+      let contact = fonction.getContact(args, index);
+      return fonction.formaterNumeroTelephone('+261'+contact);
+    },
+    getSimpleContact: function(args, index){
+      return fonction.getContact(args, index);
     }
   }
 }));

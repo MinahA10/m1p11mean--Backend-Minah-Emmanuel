@@ -40,13 +40,15 @@ function uploadImage(path) {
       filename: function (req, file, cb) {
         return fileName(req, file, cb);
       }
-    })
-
+    }),
+    limits: {
+      fileSize: 10 * 1024 * 1024 // Limite de taille du fichier (ici, 10 Mo)
+    }
   });
 }
 
 function formaterNumeroTelephone(numero) {
-  let numeroFormatte = "-------------------------";
+  let numeroFormatte = "---------------------";
   if (numero.length > 4) {
     const numeroPropre = numero.replace(/\D/g, '');
     const groupe1 = numeroPropre.slice(0, 3);
@@ -59,4 +61,59 @@ function formaterNumeroTelephone(numero) {
   return numeroFormatte;
 }
 
-module.exports = {getFileExtension, formatMillier, ucwords, listContact, fileName, uploadImage};
+function getContact(contactList, index){
+  let contact = "";
+  if(contactList.length == 2 && index == 1){
+    contact = contactList[index];
+  }
+  else if(contactList.length >= 1 && contactList.length <= 2 && index == 0){
+    contact = contactList[0];
+  }
+  return contact;
+}
+
+function supprimerElement(tableau, elementASupprimer) {
+  const index = tableau.indexOf(elementASupprimer);
+  if (index !== -1) {
+    tableau.splice(index, 1);
+  }
+}
+
+function deleteDouble(array1, array2){
+  if(array2.length >= 1){
+    array2.forEach(element => {
+      if(!array1.includes(element)){
+        array1.push(element);
+      }
+    });
+  }else{
+    array1 = [];
+  }
+  return array1;
+}
+
+function deleteElement(array1, array2){
+  let array = deleteDouble(array1, array2);
+  array.forEach(element => {
+    if(!array2.includes(element)){
+      supprimerElement(array, element);
+    }
+  });
+  return array;
+}
+
+function isArray(args){
+  let array = [];
+  if(Array.isArray(args)){
+    args.forEach(element => {
+      array.push(element);
+    });
+  }else{
+    if(args !== undefined){
+      array.push(args);
+    }
+  }
+  return array;
+}
+
+module.exports = {getFileExtension, formatMillier, ucwords, listContact, fileName, uploadImage, formaterNumeroTelephone, getContact, deleteDouble, isArray, deleteElement};

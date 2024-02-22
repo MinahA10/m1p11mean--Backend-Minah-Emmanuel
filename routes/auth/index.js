@@ -41,6 +41,11 @@ router.post('/save-employe', authMiddleware, uploadImageUser.array('photo'), use
 // Route pour voir la liste des employé
 router.get('/employes', authMiddleware, userController.listEmployes);
 
+router.post('/update-photo-user', authMiddleware, uploadImageUser.single('file'), userController.updatePhoto);
+
+router.get('/ajax-simple-user', authMiddleware, userController.getSimpleUser);
+
+router.post('/update-profile-user', authMiddleware, userController.updateProfileUser);
 
 
 
@@ -55,6 +60,10 @@ router.post('/suppression-service', authMiddleware, serviceController.suppressio
 
 router.get('/ajax-services/:id', authMiddleware, serviceController.ajaxSimpleServices);
 
+
+
+// route profil user
+router.get('/profile', authMiddleware, userController.profile);
 
 
 module.exports = router;
