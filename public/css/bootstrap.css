@@ -68,3 +68,26 @@
     height: 50px;
     border-radius: 50%;
 }
+
+.photo-profile{
+    max-width: 150px;
+    max-height: 150px;
+    border-radius: 50%;
+    border: 5px solid #ddd;
+}
+
+.display-none{
+    display: none;
+}
+
+.fs-30{
+    font-size: 30px!important;
+}
+
+.gray{
+    color: #ccc;
+}
+
+.start-75 {
+    left: 75% !important;
+  }

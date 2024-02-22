@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../../models/user');
 const jwtService = require('../../services/jwtService');
 const fonction = require('../../models/fonction');
+const { title } = require('process');
 
 // exports.login = async (req, res, next) => {
 //   const { name, password } = req.body;
@@ -44,7 +45,6 @@ async function register(req, res, next) {
       photo: urlApp+'/images/users/'+ fileName,
       speciality: speciality,
     };
-    console.log(dataUser);
       try{
         const userModel = new User(dataUser);
         await userModel.save();
@@ -65,4 +65,47 @@ async function listEmployes(req, res, next) {
   }
 };
 
-module.exports = {register, listEmployes};
+async function updatePhoto(req, res, next) {
+  const file = req.file;
+  if (!file) {
+    return res.status(400).send('Aucun fichier téléchargé.');
+  }
+  const urlApp = req.protocol + '://' + req.get('host');
+  const fileName = file.filename;
+  const dataUser = {
+    photo: urlApp+'/images/users/'+ fileName,
+    updatedAt: new Date()
+  };
+  await User.findByIdAndUpdate(req.session.user._id, dataUser, {new: true});
+  req.session.user = await User.findOne({_id: req.session.user._id}).lean();
+  res.json({resultat: true});
+}
+
+function profile(req, res, next){
+  res.render('pages/profile/profile', {layout: 'auth', title: 'Page de profile', page: 'Page de votre profile'});
+}
+
+function getSimpleUser(req, res, next){
+  return res.json(req.session.user);
+}
+
+async function updateProfileUser(req, res, next){
+  const contactList = fonction.listContact(req.body.contact1.trim(), req.body.contact2.trim());
+  const speciality = fonction.isArray(req.body.speciality);
+  const dataUser = {
+    firstName: req.body.firstName.trim().toUpperCase(),
+    lastName: fonction.ucwords(req.body.lastName.trim()),
+    contact: fonction.deleteDouble(req.session.user.contact, contactList),
+    speciality: fonction.deleteElement(req.session.user.speciality, speciality),
+    updatetAt: new Date()
+  };
+  try{
+    await User.findByIdAndUpdate(req.session.user._id, dataUser, {new: true});
+    req.session.user = await User.findOne({_id: req.session.user._id}).lean();
+    res.redirect('/auth/profile');
+  }catch(err){
+      res.status(500).render("pages/error/error-500");
+  }
+}
+
+module.exports = {register, listEmployes, profile, updatePhoto, getSimpleUser, updateProfileUser};
