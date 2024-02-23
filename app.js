@@ -40,6 +40,13 @@ app.engine('handlebars', exphbs.engine({
     },
     formaterNumeroTelephone: function(args){
       return fonction.formaterNumeroTelephone('+261'+args);
+    },
+    getContact: function(args, index){
+      let contact = fonction.getContact(args, index);
+      return fonction.formaterNumeroTelephone('+261'+contact);
+    },
+    getSimpleContact: function(args, index){
+      return fonction.getContact(args, index);
     }
   }
 }));
@@ -55,6 +62,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/auth/css', express.static(__dirname + '/public/css'));
 app.use('/auth/js', express.static(__dirname + '/public/js'));
 app.use('/auth/images', express.static(__dirname + '/public/images'));
+app.use('/auth/parametre/css', express.static(__dirname + '/public/css'));
+app.use('/auth/parametre/js', express.static(__dirname + '/public/js'));
+app.use('/auth/parametre/images', express.static(__dirname + '/public/images'));
 app.use(cors());
 
 app.use(session({

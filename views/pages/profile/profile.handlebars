@@ -1,0 +1,126 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="my-2 mx-4">
+                <div class="card-body">
+                    <div class="col-12">
+                        <div class="row" id="display-profile">
+                            <h4 class="text-center fw-bold">Votre profile</h4>
+                            <div class="col-12 d-flex justify-content-center mt-4">
+                                <div class="position-relative">
+                                    <div class="large profile border">
+                                        <img src="{{ user.photo }}" alt="Photo de profile">
+                                        <div class="position-absolute fs-30 gray bottom-0 start-75">
+                                            <input type="file" id="fileInput" name="photo" style="display: none;">
+                                            <label for="fileInput"><i class="fas fa-camera cursor-pointer"></i></label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-12 mt-4">
+                                <ul class="list-group">
+                                    <li class="list-group-item"><i class="fas fa-user"></i> <span
+                                            class="fw-bold">Nom et Prénom : </span>{{user.firstName}} {{user.lastName}}
+                                    </li>
+                                    <li class="list-group-item"><i class="fas fa-envelope"></i> <span
+                                            class="fw-bold">E-mail : </span> {{user.email}}</li>
+                                    <li class="list-group-item"><i class="fas fa-phone"></i> <span
+                                            class="fw-bold">Numéro téléphone n° 1 : </span>{{getContact user.contact 0}}</li>
+                                    <li class="list-group-item"><i class="fas fa-phone"></i> <span
+                                            class="fw-bold">Numéro téléphone n° 2 : </span>{{getContact user.contact 1}}</li>
+                                    <li class="list-group-item"><i class="fas fa-clipboard-list"></i><span class="fw-bold"> Spécialité : </span>
+                                        <ul>
+                                            {{#each user.speciality}}
+                                                <li>{{this}}</li>
+                                            {{/each}}
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-md-4 my-3">
+                                <button type="button" class="btn btn-outline-success" id="btn-display-modif-profile"><i class="fas fa-pencil-alt"></i> Modifier</button>
+                                <a href="/auth/home" class="btn btn-outline-secondary"><i class="fas fa-times"></i> Fermer</a>
+                            </div>
+                        </div>
+                        <div class="row display-none" id="display-modif-profile">
+                            <h4 class="text-center fw-bold">Modifier votre profile</h4>
+                            <form action="/auth//update-profile-user" method="post">
+                                <div class="row mt-5">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="firstName" class="form-label">Nom <span
+                                                class="required">*</span></label>
+                                        <input type="text" class="form-control" name="firstName"
+                                            value="{{ user.firstName }}" required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="lastName" class="form-label">Prénom <span
+                                                class="required">*</span></label>
+                                        <input type="text" class="form-control" name="lastName" value="{{ user.lastName }}"
+                                            required>
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <label for="email" class="form-label">Adresse e-mail <span
+                                                class="required">*</span></label>
+                                        <input type="email" class="form-control" name="email" value="{{ user.email }}"
+                                            disabled required>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="contact1" class="form-label">Numéro téléphone n°1 <span
+                                                class="required">*</span></label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">+ 261</span>
+                                            <input type="text" class="form-control" min="9" max="9" name="contact1" value="{{getSimpleContact user.contact 0}}"
+                                                required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="contact2" class="form-label">Numéro téléphone n°2</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">+ 261</span>
+                                            <input type="text" class="form-control" min="9" max="9" name="contact2" value="{{getSimpleContact user.contact 1}}">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <label for="contact2" class="form-label">Spécialité <span
+                                                class="required">*</span></label>
+                                        <div class="row mx-1">
+                                            <div class="col-md-3 form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" id="Manicure"
+                                                    name="speciality" value="Manicure">
+                                                <label class="form-check-label" for="Manicure">Manicure</label>
+                                            </div>
+                                            <div class="col-md-2 form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" id="Coiffure_femme"
+                                                    name="speciality" value="Coiffure femme">
+                                                <label class="form-check-label" for="Coiffure_femme">Coiffure femme</label>
+                                            </div>
+                                            <div class="col-md-2 form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" id="Coloration_cheveux"
+                                                    name="speciality" value="Coloration cheveux">
+                                                <label class="form-check-label" for="Coloration_cheveux">Coloration cheveux</label>
+                                            </div>
+                                            <div class="col-md-2 form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" id="Massage"
+                                                    name="speciality" value="Massage">
+                                                <label class="form-check-label" for="Massage">Massage</label>
+                                            </div>
+                                            <div class="col-md-2 form-check form-check-inline">
+                                                <input class="form-check-input" type="checkbox" id="Pedicure"
+                                                    name="speciality" value="Pedicure">
+                                                <label class="form-check-label" for="Pedicure">Pedicure</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 my-3">
+                                        <button type="submit" class="btn btn-outline-success"><i class="fas fa-save"></i> Enregistrer</button>
+                                        <a class="btn btn-outline-danger" id="btn-close-modif-profile"><i class="fas fa-times"></i> Annuler</a>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

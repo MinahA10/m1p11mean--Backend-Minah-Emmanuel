@@ -35,7 +35,7 @@
                     </li>
                 {{else}}
                     <li class="sidebar-item">
-                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#"
+                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/auth/home"
                             aria-expanded="false">
                             <i class="fa fa-columns" aria-hidden="true"></i>
                             <span class="hide-menu">Liste rendez-vous</span>
@@ -43,11 +43,23 @@
                     </li>
                     <li class="sidebar-item">
                         <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false">
-                            <i class="fa fa-user" aria-hidden="true"></i>
-                            <span class="hide-menu">Gestion profile</span>
+                            <i class="far fa-calendar-alt" aria-hidden="true"></i>
+                            <span class="hide-menu">Gestion horaire de travail</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a class="sidebar-link waves-effect waves-dark sidebar-link" href="#" aria-expanded="false">
+                            <i class="fas fa-tasks" aria-hidden="true"></i>
+                            <span class="hide-menu">Gestion des tâches</span>
                         </a>
                     </li>
                 {{/if}}
+                <li class="sidebar-item">
+                    <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/auth/parametre" aria-expanded="false">
+                        <i class="fas fa-cog" aria-hidden="true"></i>
+                        <span class="hide-menu">Paramètre</span>
+                    </a>
+                </li>
                 <li class="text-center p-20 upgrade-btn">
                     <a href="/auth/logout" class="btn d-grid btn-danger text-white"><i class="fas fa-sign-out-alt"></i> Déconnexion</a>
                 </li>

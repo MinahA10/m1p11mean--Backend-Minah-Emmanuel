@@ -3,6 +3,83 @@ $(function(){
     let splitUrl = fullUrl.split("/");
     let urlApp = splitUrl[0]+"//"+splitUrl[2]+"/";
 
+    $(document).on("change", "#fileInput", function(e){
+        const file = this.files[0];
+        if (file) {
+            const formData = new FormData();
+            formData.append('file', file);
+            saveImage(formData);
+        }
+    });
+
+    function saveImage(formData) {
+        $.ajax({
+            url: urlApp+'auth/update-photo-user',
+            type: 'post',
+            data: formData,
+            contentType: false, // Nécessaire pour envoyer des fichiers via FormData
+            processData: false, // Nécessaire pour envoyer des fichiers via FormData
+            success: function(response) {
+                if(response.resultat){
+                    location.reload();
+                    console.log('Chemin de l\'image enregistré avec succès');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Erreur lors de l\'enregistrement du chemin de l\'image :', error);
+            }
+        });
+    }
+
+    $(document).on("click", "#btn-display-modif-profile", function(e){
+        e.preventDefault();
+        $('#display-modif-profile').removeClass('display-none');
+        $('#display-profile').addClass('display-none');
+        const specialityElement = document.querySelectorAll('.form-check-inline > label:last-child');
+        const specialityList = []
+        specialityElement.forEach(element => {
+            specialityList.push(element.textContent);
+        });
+        $.ajax({
+            url: urlApp+"auth/ajax-simple-user",
+            type: "get",
+            dataType: "json",
+            success: function(response){
+                specialityList.forEach(speciality => {
+                    if(response.speciality.includes(speciality))
+                    {
+                        let specialityFormat = speciality.replace(" ", "_");
+                        $("#"+specialityFormat).prop('checked', true);
+                    }
+                });
+            }
+        });
+    });
+
+    $(document).on("click", "#btn-close-modif-profile", function(e){
+        e.preventDefault();
+        $('#display-modif-profile').addClass('display-none');
+        $('#display-profile').removeClass('display-none');
+        const specialityElement = document.querySelectorAll('.form-check-inline > label:last-child');
+        const specialityList = []
+        specialityElement.forEach(element => {
+            specialityList.push(element.textContent);
+        });
+        $.ajax({
+            url: urlApp+"auth/ajax-simple-user",
+            type: "get",
+            dataType: "json",
+            success: function(response){
+                specialityList.forEach(speciality => {
+                    if(!response.speciality.includes(speciality))
+                    {
+                        let specialityFormat = speciality.replace(" ", "_");
+                        $("#"+specialityFormat).prop('checked', false);
+                    }
+                });
+            }
+        });
+    });
 
     $(document).on("click", "#modificationServices", function(e){
         e.preventDefault();
