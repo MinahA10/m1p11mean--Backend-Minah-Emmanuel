@@ -3,6 +3,7 @@ var router = express.Router();
 const authController = require('../../controllers/Admin/authController');
 const serviceController = require('../../controllers/Admin/serviceController');
 const userController = require('../../controllers/Admin/userController');
+const parametreController = require('../../controllers/Admin/parametreController');
 const fonction = require('../../models/fonction');
 
 
@@ -38,6 +39,9 @@ router.get('/new-employe', authMiddleware, function(req, res, next) {
 // Route pour enregistrer un nouvel employé
 router.post('/save-employe', authMiddleware, uploadImageUser.array('photo'), userController.register);
 
+// route profil user
+router.get('/profile', authMiddleware, userController.profile);
+
 // Route pour voir la liste des employé
 router.get('/employes', authMiddleware, userController.listEmployes);
 
@@ -62,8 +66,9 @@ router.get('/ajax-services/:id', authMiddleware, serviceController.ajaxSimpleSer
 
 
 
-// route profil user
-router.get('/profile', authMiddleware, userController.profile);
+// route paramètre
+router.get('/parametre', authMiddleware, parametreController.list);
 
+router.post('/update-password', authMiddleware, parametreController.updatePassword);
 
 module.exports = router;

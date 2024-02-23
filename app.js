@@ -55,6 +55,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/auth/css', express.static(__dirname + '/public/css'));
 app.use('/auth/js', express.static(__dirname + '/public/js'));
 app.use('/auth/images', express.static(__dirname + '/public/images'));
+app.use('/auth/parametre/css', express.static(__dirname + '/public/css'));
+app.use('/auth/parametre/js', express.static(__dirname + '/public/js'));
+app.use('/auth/parametre/images', express.static(__dirname + '/public/images'));
 app.use(cors());
 
 app.use(session({

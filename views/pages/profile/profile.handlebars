@@ -8,10 +8,12 @@
                             <h4 class="text-center fw-bold">Votre profile</h4>
                             <div class="col-12 d-flex justify-content-center mt-4">
                                 <div class="position-relative">
-                                    <img src="{{ user.photo }}" alt="Photo de profile" class="photo-profile">
-                                    <div class="position-absolute fs-30 gray bottom-0 start-75">
-                                        <input type="file" id="fileInput" name="photo" style="display: none;">
-                                        <label for="fileInput"><i class="fas fa-camera cursor-pointer"></i></label>
+                                    <div class="large profile border">
+                                        <img src="{{ user.photo }}" alt="Photo de profile">
+                                        <div class="position-absolute fs-30 gray bottom-0 start-75">
+                                            <input type="file" id="fileInput" name="photo" style="display: none;">
+                                            <label for="fileInput"><i class="fas fa-camera cursor-pointer"></i></label>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

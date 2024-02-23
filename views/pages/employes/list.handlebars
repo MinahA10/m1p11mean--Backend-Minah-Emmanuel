@@ -16,7 +16,11 @@
                         <tbody>
                             {{#each employes}}
                             <tr>
-                                <td align="center"><img src="{{this.photo}}" alt="{{this.name}} Photo" class="images"></td>
+                                <td align="center">
+                                    <div class="meduim profile mx-4">
+                                        <img src="{{this.photo}}" alt="{{this.name}} Photo">
+                                    </div>
+                                </td>
                                 <td>{{this.firstName}} {{this.lastName}}</td>
                                 {{#if this.statut}}
                                 <td align="center"><i class="fs-6 fas fa-toggle-on cursor-pointer"></i></td>
