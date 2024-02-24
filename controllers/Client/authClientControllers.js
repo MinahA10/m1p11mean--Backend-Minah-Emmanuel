@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
-const Client = require('../models/client');
-const jwtService = require('../services/jwtService');
+const Client = require('../../models/client');
+const jwtService = require('../../services/jwtService');
 
 exports.login = async (req, res, next) => {
   const { email, password } = req.body;
@@ -18,10 +18,9 @@ exports.login = async (req, res, next) => {
       return res.status(401).json({ message: 'Invalid username or password' });
     }
 
-    const jwtSecret = jwtService.generateJWTSecret();
-    const token = jwt.sign({ clientId: client._id }, jwtSecret , {
-      expiresIn: '1h',
-    });
+    const jwtSecret = process.env.JWT_SECRET;
+    
+    const token = jwt.sign({ clientId: client._id }, jwtSecret , { expiresIn: '1h'});
 
     res.json({ token });
   } catch (error) {
@@ -43,9 +42,9 @@ exports.register = async (req, res, next) => {
     const newClient = new Client({ name,email, password, contact, address});
     await newClient.save();
 
-    const jwtSecret = jwtService.generateJWTSecret();
+    const jwtSecret = process.env.JWT_SECRET;
     
-    const token = jwt.sign({ userId: newClient._id }, jwtSecret, {
+    const token = jwt.sign({ clientId: newClient._id }, jwtSecret, {
       expiresIn: '1h',
     });
 

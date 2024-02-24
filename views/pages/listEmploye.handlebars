@@ -1,0 +1,39 @@
+<div class="row">
+    <div class="col-sm-12">
+        <div class="white-box">
+            <h3 class="box-title">Liste Employes</h3>
+            <div class="col-sm-12">
+                <a href="/new-employe" class="btn btn-primary  d-none d-md-block pull-right ms-3 hidden-xs hidden-sm waves-effect waves-light text-white" style="width: 150px; ">
+                    <i class="fa fa-plus" aria-hidden="true"></i>Ajouter
+                </a>
+            </div>
+           
+            <div class="table-responsive">
+                <table class="table text-nowrap">
+                    <thead>
+                        <tr>
+                            <th class="border-top-0">#</th>
+                            <th class="border-top-0">Photo</th>
+                            <th class="border-top-0">Name</th>
+                            <th class="border-top-0">Contact</th>
+                            <th class="border-top-0">speciality</th>
+                            <th class="border-top-0">Role</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each employes}}
+                            <tr>
+                                <td>{{@index}}</td>
+                                <td><img src="{{this.photo}}" alt="{{this.name}} Photo" style="max-width: 100px;"></td>
+                                <td>{{this.name}}</td>
+                                <td>{{this.contact}}</td>
+                                <td>{{this.speciality}}</td>
+                                <td>admin</td>
+                            </tr>
+                         {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
