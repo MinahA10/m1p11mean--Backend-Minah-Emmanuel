@@ -21,7 +21,6 @@ var indexRouterAuth = require('./routes/auth/index');
 var authClientRoute = require('./routes/client/authClient');
 
 //routes
-var usersRouter = require('./routes/users');
 var indexRouterGuest = require('./routes/guest/index');
 var indexRouterAuth = require('./routes/auth');
 var authClientRoute = require('./routes/client/authClient');

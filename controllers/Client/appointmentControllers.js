@@ -3,7 +3,7 @@ const { verifyToken } = require('../../middlewares/authJWT');
 const Client = require('../../models/client');
 const { timeToMinute,addMinutesToDate } = require('../../models/fonction')
 
-const moment = require('moment');
+// const moment = require('moment');
 
 exports.verifyAvailability = async (req, res) => {
   try {
