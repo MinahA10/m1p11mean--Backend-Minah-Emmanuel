@@ -4,6 +4,8 @@ const authController = require('../../controllers/Admin/authController');
 const serviceController = require('../../controllers/Admin/serviceController');
 const userController = require('../../controllers/Admin/userController');
 const parametreController = require('../../controllers/Admin/parametreController');
+const horaireController = require('../../controllers/Admin/horaireController');
+const tacheController = require('../../controllers/Admin/tacheController');
 const fonction = require('../../models/fonction');
 
 
@@ -70,5 +72,16 @@ router.get('/ajax-services/:id', authMiddleware, serviceController.ajaxSimpleSer
 router.get('/parametre', authMiddleware, parametreController.list);
 
 router.post('/update-password', authMiddleware, parametreController.updatePassword);
+
+
+// route horaire de travail
+router.get('/horaire-de-travail', authMiddleware, horaireController.page);
+
+
+
+
+// route tâche
+router.get('/liste-des-taches', authMiddleware, tacheController.page);
+
 
 module.exports = router;
