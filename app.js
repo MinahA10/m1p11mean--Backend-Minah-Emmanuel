@@ -25,6 +25,13 @@ var usersRouter = require('./routes/users');
 var indexRouterGuest = require('./routes/guest/index');
 var indexRouterAuth = require('./routes/auth');
 var authClientRoute = require('./routes/client/authClient');
+var appointmentRoute = require('./routes/client/appointmentRoute');
+var serviceRoute = require('./routes/client/serviceRoute');
+var employeRoute = require('./routes/client/employeRoute');
+
+//routes
+var indexRouterGuest = require('./routes/guest/index');
+var indexRouterAuth = require('./routes/auth/index');
 
 var app = express();
 
@@ -67,8 +74,9 @@ app.use('/auth/parametre/js', express.static(__dirname + '/public/js'));
 app.use('/auth/parametre/images', express.static(__dirname + '/public/images'));
 app.use(cors());
 
+
 app.use(session({
-  secret: 'm1p10mean-Emmanuel-Minah-Backend',
+  secret: 'm1p11mean-Emmanuel-Minah-Backend',
   resave: false,
   saveUninitialized: true,
   cookie: { 
@@ -91,7 +99,12 @@ app.use((req, res, next) => {
 app.options('api/auth/login', cors());
 app.use('/', indexRouterGuest);
 app.use('/auth', indexRouterAuth);
+
+//client api
 app.use('/api/auth',authClientRoute);
+app.use('/api/appointment',appointmentRoute);
+app.use('/api/service',serviceRoute);
+app.use('/api/employe',employeRoute);
 
 
 // catch 404 and forward to error handler

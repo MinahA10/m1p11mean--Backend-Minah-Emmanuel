@@ -116,4 +116,28 @@ function isArray(args){
   return array;
 }
 
-module.exports = {getFileExtension, formatMillier, ucwords, listContact, fileName, uploadImage, formaterNumeroTelephone, getContact, deleteDouble, isArray, deleteElement};
+function timeToMinute(durationString){
+  
+  if (durationString) {
+  const [hours, minutes] = durationString.split(':').map(Number);
+  
+  const totalMinutes = hours * 60 + minutes;
+  return totalMinutes; 
+} else {
+  console.error("durationString is undefined");
+}
+ 
+}
+
+function addMinutesToDate(dateString, minutesToAdd) {
+
+  const date = new Date(dateString);
+
+  date.setMinutes(date.getMinutes() + minutesToAdd);
+
+  const formattedDate = date.toISOString();
+
+  return formattedDate;
+}
+
+module.exports = {getFileExtension, formatMillier, ucwords, listContact, fileName, uploadImage, formaterNumeroTelephone, getContact, deleteDouble, isArray, deleteElement,timeToMinute,addMinutesToDate};
