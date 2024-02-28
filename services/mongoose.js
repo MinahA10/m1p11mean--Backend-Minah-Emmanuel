@@ -5,7 +5,7 @@ const mangoose = require('mongoose');
 
 async function connectDB() {
     try{
-        await mangoose.connect(process.env.MONGODB_URL);
+        await mangoose.connect(process.env.MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true });
         console.log('DB connecte!');
     }catch(err){
         console.log(err);
